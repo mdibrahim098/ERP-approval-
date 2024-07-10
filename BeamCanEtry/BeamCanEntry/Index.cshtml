@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Beam Can";
+}
+
+
+
+<div ng-controller="tokenCtrl">
+    <div class="container" ng-controller="BeamCanCtrl">
+        <!-- Breadcrumbs line -->
+        <div ng-controller="BreadcrumbCtrl">
+            @Html.Partial("~/Areas/SystemCommon/Views/Shared/_Partial/_Breadcrumbs.cshtml")
+        </div>
+        <!-- /Breadcrumbs line -->
+        <!--=== Page Header ===-->
+        <div class="page-header">
+        </div>
+        <!--==Delete Modal From System Common==-->
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Areas/SystemCommon/Views/DeleteModal/_modalCmnDelete.cshtml")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Areas/SystemCommon/Views/WaitModal/_modalWait.cshtml")
+            </div>
+        </div>
+
+        <!--==Delete Modal From System Common==-->
+        <!-- /Page Header -->
+        <div class="row" >
+            <div class="col-md-12" >
+                <div class="widget box">
+                    <div class="widget-header" >
+                        <h4><i class="icon-reorder"></i> {{PageTitle}} </h4>
+                        <div class="toolbar no-padding">
+                            <div class="btn-group">
+                                <!--Start Code For Approval Setting-->
+                                <span class="pull-left" ng-show="ApprovalButtonShow">
+                                    <span ng-show="{{IsApproved}}" id="addUser" class="btn btn-success">
+                                        <a href="" ng-href="" data-toggle="modal" title="Approve">
+                                            <i class="icon-ok-sign"></i> Approve
+                                        </a>
+                                    </span>
+                                    <span ng-show="{{IsDelained}}" id="addUser" class="btn btn-warning margin-right-btn">
+                                        <a href="" ng-href="" data-toggle="modal" title="Decline">
+                                            <i class="icon-remove-sign"></i> Decline
+                                        </a>
+                                    </span>
+                                </span>
+                                <!--End Code For Approval Setting-->
+
+                                <span class="pull-left">
+                                    @Html.Partial("~/Areas/SystemCommon/Views/CommonButton/_cmnButton.cshtml")
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content" ng-show="IsShow">
+                        @Html.Partial("~/Areas/Production/Views/BeamCanEntry/_Partial/_formBeamCanEntry.cshtml")
+                    </div>
+                </div>
+            </div> <!-- /.col-md-12 -->
+        </div>
+
+        <div class="row" ng-hide="IsHidden">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4><i class="icon-reorder"></i> {{ListTitle}}</h4>
+                        <div class="toolbar no-padding">
+                            <div class="btn-group">
+                                <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content no-padding">
+                        <div @*when-scrolled="loadUnitOfMeasurementRecords(1)"*@>
+                            @Html.Partial("~/Areas/Production/Views/BeamCanEntry/_Partial/_tableOfBeamCanEntry.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /.col-md-12 -->
+        </div>
+       
+        <div class="row" ng-hide="list">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4>BeamCan List</h4>
+                        <div class="toolbar no-padding">
+                            <div class="btn-group">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content no-padding">
+                        <div >
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                      
+                                        <th>Type</th>
+                                        <th>BeamCan No</th>
+                                          <th>Button</th>
+                                    </tr>
+                                   
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in ListItemBeamCan">
+                                       
+                                        <td>{{x.Name}}</td>
+                                        <td>{{x.BeamNo}}</td>
+                                        <td> <button class="btn btn-warning " ng-click="delete($index)">Delete</button></td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /.col-md-12 -->
+        </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<!-- /.container -->
+@section AngularScript{
+    <script src="~/Areas/Production/ScriptsNg/Directives/DropdownMultiselect.js"></script>
+    <script src="~/Areas/Production/ScriptsNg/Service/ProductionCrudService.js"></script>
+    <script src="~/Areas/Production/ScriptsNg/Service/CrudService.js"></script>
+    <script src="~/Areas/Production/ScriptsNg/Directives/Conversion.js"></script>
+    <script src="~/Areas/Production/ScriptsNg/Service/FinishGoodService.js"></script>
+    @*<script src="~/Areas/Production/ScriptsNg/Controllers/configurationCtrl.js"></script>*@
+    <script src="~/Areas/SystemCommon/ScriptsNg/Controllers/BreadcrumbCtrl.js"></script>
+    <script src="~/Areas/Token/TokenController.js"></script>
+    @*<script src="~/Areas/Production/ScriptsNg/Controllers/YarnSetUpConfigurationCtrl.js"></script>*@
+    @*<script src="~/Areas/Production/ScriptsNg/Controllers/FabricSetUpConfigurationCtrl.js"></script>*@
+    @*<script src="~/Areas/Production/ScriptsNg/Controllers/FabricStyleConfigurationCtrl.js"></script>*@
+
+    <!-- / Item Master Modal Refference -->
+    <script src="~/Areas/SystemCommon/ScriptsNg/Service/PublicService.js"></script>
+    <script src="~/Areas/SystemCommon/ScriptsNg/Directives/AttrEnter.js"></script>
+
+    @*<script src="~/Areas/Production/ScriptsNg/Controllers/FabricSetUpConfigurationCtrl.js"></script>*@
+<script src="~/Areas/Production/ScriptsNg/Controllers/BeamCanEntryCTRL.js"></script>
+
+}
+

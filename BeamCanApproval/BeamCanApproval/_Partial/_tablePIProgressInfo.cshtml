@@ -1,0 +1,39 @@
+﻿@*<input id="hdoDetailSearch" ng-model="HdoDetailSearch" type="text" class="form-control search" placeholder="Search...">*@
+
+
+<table class="table table-hover general-table">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th style="text-align:center">Date</th>
+            <th style="text-align:center">Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="PIProgress in PIProgressList">
+            <td>
+                {{$index+1}}.
+            </td>
+            <td>
+                {{PIProgress.ApprovalDate}}
+            </td>
+            <td>
+                {{PIProgress.StatusName}}
+            </td>
+
+        </tr>
+    </tbody>
+
+</table>
+<p ng-show="(PIProgressList).length == 0" style="color:red">Nothing found!</p>
+
+<div class="loadmore">
+    <div ng-show="loaderMore" ng-class="result">
+        {{lblMessage}}
+    </div>
+    <div ng-show="scrollended" ng-class="result">
+        {{lblMessage}}
+    </div>
+</div>
+

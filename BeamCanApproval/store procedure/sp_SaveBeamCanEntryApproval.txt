@@ -1,0 +1,31 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SaveBeamCanEntryApproval]    Script Date: 10-Jul-24 5:50:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_SaveBeamCanEntryApproval]  
+	@ID int,
+	@Status int,
+	@step int
+AS
+BEGIN
+	if(@step =1)
+	begin
+	UPDATE CmnBeam
+		SET IsManagerApproved1 = @Status
+		where ID = @ID
+
+		select 'Success' as result
+		
+	end
+		
+	if(@step =2)
+		begin
+			UPDATE CmnBeam
+			SET IsManagerApproved2 = @status
+			where ID = @ID
+             select 'Success' as result
+		end
+END

@@ -1,0 +1,57 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSBeamCanMasterApprovalPending]    Script Date: 10-Jul-24 5:47:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--  Exec sp_GetSBeamCanMasterApprovalPending 1,1,2
+ALTER PROCEDURE [dbo].[sp_GetSBeamCanMasterApprovalPending]
+@Pending int,
+@PageNumber int,
+@RowCountPerPage int,
+@step int
+AS
+
+
+BEGIN
+
+	IF @PageNumber = 0
+	BEGIN
+		SET @PageNumber = 1
+
+	END
+    --if @Pending =0
+ 
+    BEGIN
+	declare @skiprow int= (@PageNumber-1)*@RowCountPerPage
+
+	declare @TotalRecords INT;
+	set @TotalRecords = ( select count(BeamCan_No) from CmnBeam where ISNULL( IsManagerApproved1,0) = @Pending)
+	end
+	begin
+	if(@step =1)
+	begin
+        SELECT @TotalRecords as TotalRecords, ID, BeamCan_No, Type 
+        from CmnBeam
+        where ISNULL( IsManagerApproved1,0) = @Pending
+		order by ID desc
+		OFFSET @skiprow ROWS FETCH NEXT @RowCountPerPage ROWS ONLY 
+		end
+
+		else if (@step =2)
+		begin
+        SELECT @TotalRecords as TotalRecords, ID, BeamCan_No, Type 
+        from CmnBeam
+
+        where ISNULL( IsManagerApproved1,0) = 1 and ISNULL( IsManagerApproved2,0) = @Pending
+		order by ID desc
+		OFFSET @skiprow ROWS FETCH NEXT @RowCountPerPage ROWS ONLY 
+		end
+	
+	
+    END
+
+
+	
+END

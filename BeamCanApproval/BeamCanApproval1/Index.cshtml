@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Beam Can Approve1";
+}
+
+<div ng-controller="tokenCtrl">
+    <div class="container" ng-controller="PIApprovalCtrl">
+        <!-- Breadcrumbs line -->
+        <div ng-controller="BreadcrumbCtrl">
+            @Html.Partial("~/Areas/SystemCommon/Views/Shared/_Partial/_Breadcrumbs.cshtml")
+        </div>
+        <!-- /Breadcrumbs line -->
+        <!--=== Page Header ===-->
+        <div class="page-header">
+
+        </div>
+        <!-- /Page Header -->
+        <!--=== Page Content ===-->
+        <!--==Delete Modal From System Common==-->
+        <!--==Delete Modal From System Common==-->
+        <div id="PIDiv">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget box">
+                        <div class="widget-header">
+                            <h4><i class="icon-reorder"></i> {{PageTitle}}</h4>
+                            <div class="toolbar no-padding">
+                                <div class="btn-group">
+                                    <span class="pull-left">
+                                        <span id="Pending" ng-if="ListBtn" ng-class="{'btn margin-right-btn':true,'btn-warning':btnPendingClick,'btn-outline-warning':!btnPendingClick}" ng-click="btnPndingClick()">Pending</span>
+                                        <span id="Approved" ng-if="ListBtn" ng-class="{'btn margin-right-btn':true,'btn-success':btnApprovedClick,'btn-secondary':!btnApprovedClick}" ng-click="btnAprvedClick()">Approved</span>
+                                        <span id="Rejected" ng-if="ListBtn" ng-class="{'btn margin-right-btn':true,'btn-danger':btnRejectedClick,'btn-outline-warning':!btnRejectedClick}" ng-click="btnRjctdClick()">Rejected</span>
+
+                                        <span class="btn btn-success margin-right-btn" ng-if="btnApproveReject" ng-click="ConfirmApprovalModalShow()">Approve</span>
+                                        <span class="btn btn-danger margin-right-btn" ng-if="btnApproveReject" ng-click="ConfirmRejectModalShow()">Reject</span>
+                                        <span class="btn btn-info margin-right-btn" ng-if="ShowListBtn" ng-click="ShowHide()">Show List</span>
+                                    </span>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-content " ng-show="IsShow" style="background: rgb(249, 252, 199)">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-bg-12 col-md-12 col-sm-12">
+                                        @Html.Partial("~/Areas/Production/Views/BeamCanApproval/_Partial/_formBeamCanEntry.cshtml")
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row" ng-hide="IsHidden">
+                <div class="col-md-12">
+                    <div class="widget box">
+                        <div class="widget-header">
+                            <h4><i class="icon-reorder"></i> {{ListTitleActivePIMasters}}</h4>
+                            <div class="toolbar no-padding">
+                                <div class="btn-group">
+                                    <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-content no-padding">
+                            @Html.Partial("~/Areas/Production/Views/BeamCanApproval/_Partial/_tableActivePIMastrsInfo.cshtml")
+                        </div>
+                    </div>
+                </div> <!-- /.col-md-12 -->
+            </div>
+            <div class="row">
+                @*Item details Modal*@
+                @Html.Partial("~/Areas/Sales/Views/HeadOfficeSalesDeliveryOrderEntry/_Partial/_tablePIDetailsInfo.cshtml")
+            </div>
+
+
+
+            <div class="row" style="width:80%">
+                <!-- Modal dialog -->
+                <div class="modal fade" id="ApprovalHistoryModal" style="width:100%">
+                    <div class="modal-dialog" style="width:50%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                <h4 class="modal-title"><i class="icon-folder-open"></i>Approval History</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Partial("~/Areas/SystemCommon/Views/ApprovalSetup/_Partial/_tableApprovalHistoryModal.cshtml")
+                                    <button style="float:right;margin:3px; " class="btn btn-success" type="button" data-dismiss="modal" aria-hidden="true">Close</button>
+
+                                </div>
+                                <br />
+                                <div>
+
+                                </div>
+
+                            </div>
+
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div> <!-- /.row -->
+
+
+            <div class="row" style="width:80%">
+                <!-- Modal dialog -->
+                <div class="modal fade" id="ConfirmRejectModal" style="width:100%">
+                    <div class="modal-dialog" style="width:50%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                <h4 class="modal-title"><i class="icon-folder-open"></i>{{ConfirmationationModalTitle}}</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Partial("~/Areas/Sales/Views/PIApproval/_Partial/_ConfirmRejectModal.cshtml")
+                                </div>
+                                <br />
+                                <div>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div> <!-- /.row -->
+
+        </div>
+        <!-- /Page Content -->
+        <!-- /Modal Item Master(Sample) -->
+        <div class="row">
+            @Html.Partial("~/Areas/SystemCommon/Views/PublicPartialViews/_ProductionItemModal.cshtml")
+        </div>
+
+    </div>
+</div>
+<!-- /.container -->
+@section AngularScript{
+
+    <script src="~/Areas/Production/ScriptsNg/Controllers/BeamCanApprovalCTRL1.js"></script>
+    @*<script src="~/Areas/Sales/ScriptsNg/Controllers/PIApprovalCtrl.js"></script>*@
+    <script src="~/Areas/Sales/ScriptsNg/Service/CrudService.js"></script>
+    <script src="~/Areas/Production/ScriptsNg/Directives/Conversion.js"></script>
+    <script src="~/Scripts/CustomToastrMessage.js"></script>
+    <script src="~/Areas/SystemCommon/ScriptsNg/Controllers/BreadcrumbCtrl.js"></script>
+    <script src="~/Areas/Token/TokenController.js"></script>
+
+    <!-- / Item Master Modal Refference -->
+    <script src="~/Areas/SystemCommon/ScriptsNg/Service/PublicService.js"></script>
+    <script src="~/Areas/SystemCommon/ScriptsNg/Directives/AttrEnter.js"></script>
+
+}

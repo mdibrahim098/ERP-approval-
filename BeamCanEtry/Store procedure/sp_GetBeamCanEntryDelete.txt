@@ -1,0 +1,16 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetBeamCanEntryDelete]    Script Date: 10-Jul-24 5:42:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_GetBeamCanEntryDelete]
+    @ID INT
+AS
+BEGIN
+  delete from CmnBeam 
+    WHERE ID = @ID
+	select '1' as lst
+END

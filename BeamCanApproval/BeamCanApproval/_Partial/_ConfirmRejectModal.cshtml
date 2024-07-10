@@ -1,0 +1,66 @@
+﻿<div class="row" style="margin-left:5%;margin-top:2px; max-width:90% !important; max-height:300px; overflow-y:scroll; " >
+    <h3>History:</h3>
+    <table class="table table-hover"   ng-show="(ListPIProgressDetails).length != 0" style="font-size:12px !important;">
+        <thead class="grid-top-panel">
+            <tr>
+                <th>SL.</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="dataModel in ListPIProgressDetails">
+                <td>{{ $index + 1 }}.</td>
+                <td>{{dataModel.StatusName}}</td>
+                <td>{{dataModel.ApprovalDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br />
+<div class="row" style="margin: auto; margin-top: 3px; " ng-show="Changes.length>0">
+    <label class="col-md-1 control-label">Changes </label>
+    <div class="col-md-10">
+        <textarea rows="2" cols="3" readonly style="color: red; font-size: 15px; font-weight: bold;"
+                  id="txtChanges"
+                  class="form-control"
+                  name="txtChanges" ng-model="Changes"></textarea>
+    </div>
+</div>
+<br />
+
+<div style=" justify-content:center;">
+   
+    <div class="container" style="width:700px;">
+        <h3>Confirm Approval/Rejection:</h3>
+        <br />
+        <div class="row">
+            <label class="col-md-3 control-label">Comments/Reason: </label>
+            <div class="col-md-9">
+                <textarea rows="4" cols="8"
+                          id="RejectRemarks"
+                          class="form-control"
+                          name="RejectRemarks" ng-model="RejectRemarks"></textarea>
+            </div>
+        </div>
+        <br />
+        <div class="row" ng-if="btnConfirmReject">
+            <p style="color:red; font-weight:bold">*** Rejection of PI will automatically inactivate corresponding Planning Consumption, BPGL and Production Order from ERP. After Approving again Planning Consumption will be revised automatically but BPGL and Production Order will be cancelled in case of quantity change.... </p>
+        </div>
+        <div class="row">
+            <span style="float: right; margin-left: 3px;" class="btn btn-warning margin-right-btn" data-dismiss="modal" aria-hidden="false">Close</span>
+                
+            <span class="btn btn-danger margin-right-btn" style="float:right" ng-if="btnConfirmReject" ng-click="Save(2)">Reject</span>
+
+            <span class="btn btn-success margin-right-btn" style="float:right" ng-if="btnConfirmApprove" ng-click="Save(1)">Approve</span>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+

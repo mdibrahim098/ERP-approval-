@@ -1,0 +1,17 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetBeamCanEntry]    Script Date: 10-Jul-24 5:42:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[sp_GetBeamCanEntry]
+
+
+
+as
+
+--exec sp_GetBeamCanEntry
+begin
+ select id,BeamCan_No as BeamCanNo, Type as Type from CmnBeam 
+end

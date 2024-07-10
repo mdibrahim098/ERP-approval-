@@ -1,0 +1,45 @@
+﻿
+
+<table style="font-size: 15px; font-family: Times New Roman, Times, serif;" class="table  table-hover general-table">
+    <thead class="grid-top-panel">
+        <tr>
+
+
+            <th>Sequence</th>
+            <th>Status</th>
+            <th>Remarks</th>
+            <th>Approved/Rejected By</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="dataModel in ListApprovalHistory">
+
+
+            <td>{{dataModel.id}}</td>
+            <td ng-class="{'text-danger':dataModel.StatusName=='REJECTED', 'text-success':dataModel.StatusName=='APPROVED',}">
+                {{dataModel.StatusName}}
+            </td>
+            <td style="min-width:200px">{{dataModel.Remarks}}</td>
+            <td>
+                {{dataModel.UserFullName.split("+")[0]}}
+                <br />
+                {{dataModel.UserFullName.split("+")[1]}}
+
+
+            </td>
+            <td>{{dataModel.QuotationDate|date:"dd/MM/yyyy"}}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div class="loadmore">
+    <div ng-show="loaderMore" ng-class="result">
+        {{lblMessage}}
+    </div>
+    <div ng-show="scrollended" ng-class="result">
+        {{lblMessage}}
+    </div>
+</div>

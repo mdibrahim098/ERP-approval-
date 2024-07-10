@@ -1,0 +1,205 @@
+﻿
+<form novalidate name="frmPI" id="frmPI" class="form-horizontal row-border">
+    <input type="hidden" id="pIID" readonly="readonly" ng-model="PIID" />
+    <input type="hidden" id="pITypeID" readonly="readonly" ng-model="PITypeID" />
+    <input type="hidden" id="menuID" readonly="readonly" ng-model="MenuID" />
+    <input type="hidden" id="secret" readonly="readonly" ng-model="IsContinue" required />
+    <input type="hidden" id="txtBuyerRefID" ng-model="txtBuyerRefID" />
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="form-group">
+            <label class="col-md-3 control-label">PI Info </label>
+            <div class="col-md-9">
+                <input type="text"
+                        id="pINo"
+                        class="form-control" style="font-weight:bold; color:red !important;"
+                        name="pINo" ng-model="HPINO" placeholder="New" ng-readonly="true" /> @*//     validation problem*@
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="input17">Vendor</label>
+                <div class="col-md-9" ng-mouseenter="ShowVendorHover()" ng-mouseleave="HideVendorHover()">
+                    @*<p>Selected Buyer: {{lstBuyerList}}</p>*@
+                    <select id="ddlBuyer" class="select2-select-00"
+                            ng-model="lstBuyerList"
+                            name="ddlBuyer"
+                            data-placeholder="--Select Buyer--"
+                            style="width: 100%" disabled>
+                        <option></option>
+                    </select>
+                    
+                    <div style="position:absolute;z-index:100; border:1px solid black; background:rgb(238, 248, 223) ;
+                                                                         width:90%;margin-top:1px;padding:1px;" ng-show="VendorHover">
+                        {{lstBuyerList}}
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="input17">Buyer</label>
+                <div class="col-md-9" ng-mouseenter="ShowBuyerHover()" ng-mouseleave="HideBuyerHover()">
+                    <input type="text"
+                           id="Vendor"
+                           class="form-control"
+                           name="Vendor" ng-model="Vendor" ng-readonly="true" disabled />
+
+                    <span  style="position:absolute;z-index:100; border:1px solid black; background:rgb(238, 248, 223) ; width:90%;margin-top:1px;padding:1px;" ng-show="BuyerHover">
+                        {{Vendor}}
+                    </span>
+                </div>
+            </div>
+               
+
+            <div class="form-group">
+
+                <label class="col-md-3 control-label" for="input17">Sales Person </label>
+                <div class="col-md-9">
+                    <select id="ddlSalesPerson" class="select2-select-00" disabled
+                            ng-model="lstSalesPersonList"
+                            name="ddlSalesPerson"
+                            style="width: 100%" ng-options="lsp.UserID as lsp.UserFullName for lsp in listSalesPerson" required>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+        @*<div class="form-group">
+                <label class="col-md-4 control-label" for="input17">Booking No </label>
+                <div class="col-md-6">
+                    <select id="ddlBookingList" class="select2-select-00"
+                            ng-model="lstBookingNG"
+                            name="ddlBookingList" ng-change="LoadDetailByBookingID()"
+                            data-placeholder="--Select Booking--"
+                            style="width: 100%" ng-options="vl.BookingID as vl.BookingNo for vl in listBooking" required disabled>
+                        <option></option>
+                    </select>
+                </div>
+                <span class="error" ng-show="(frmPI.$dirty||submitted) && frmPI.ddlBookingList.$error.required">*</span>
+            </div>*@
+
+        @*<div class="form-group">
+                <label class="col-md-4 control-label" for="txtBuyer">Buyer</label>
+                <div class="col-md-6">
+                    <textarea rows="1" cols="3"
+                              id="txtBuyer"
+                              class="form-control"
+                              name="txtBuyer" ng-model="txtBuyer" readonly></textarea>
+                </div>
+
+            </div>*@
+
+
+
+        @*<div class="form-group">
+            <label class="col-md-4 control-label">PI Date </label>
+            <div class="col-md-3">
+                <input type="text"
+                       id="dtpIDate"
+                       class="form-control datepicker"
+                       name="dtpIDate" ng-model="PIDate" value="{{PIDate | date:'dd-MM-yyyy'}}"
+                       required readonly disabled />
+                </div>
+                <span class="error" ng-show="(frmPI.$dirty||submitted) && frmPI.dtpIDate.$error.required">*</span>
+            </div>*@
+
+
+        @*<div class="col-md-6">*@
+
+        @*<div class="form-group">
+                <label class="col-md-4 control-label" for="input17">Incoterm </label>
+                <div class="col-md-4">
+                    <select id="ddlIncoterm" class="select2-select-00" disabled
+                            ng-model="lstIncoNG"
+                            name="ddlIncoterm"
+                            data-placeholder="--Select Inco.--"
+                            style="width: 100%" ng-options="vl.IncoTermID as vl.IncotermName for vl in listIncoterm" required>
+                        <option></option>
+                    </select>
+                </div>
+                <span class="error" ng-show="(frmPI.$dirty||submitted) && frmPI.ddlValidity.$error.required">*</span>
+            </div>*@
+
+
+
+        @*<div class="form-group">
+                <label class="col-md-4 control-label" for="input17">Shipment </label>
+                <div class="col-md-4">
+                    <select id="ddlShipment" class="select2-select-00" disabled
+                            ng-model="lstShipmentList"
+                            name="ddlShipment"
+                            data-placeholder="--Select Shipment--"
+                            style="width: 100%" ng-options="spt.ComboID as spt.ComboName for spt in listShipment" required>
+                        <option></option>
+
+                    </select>
+                </div>
+                <span class="error" ng-show="(frmPI.$dirty||submitted) && frmPI.ddlShipment.$error.required">*</span>
+            </div>*@
+
+        @*<div class="form-group">
+                <label class="col-md-4 control-label" for="input17">Validity </label>
+                <div class="col-md-4">
+                    <select id="ddlValidity" class="select2-select-00" disabled
+                            ng-model="lstValidityList"
+                            name="ddlValidity"
+                            data-placeholder="--Select Validity--"
+                            style="width: 100%" ng-options="vl.ComboID as vl.ComboName for vl in listValidity" required>
+                        <option></option>
+                    </select>
+                </div>
+                <span class="error" ng-show="(frmPI.$dirty||submitted) && frmPI.ddlValidity.$error.required">*</span>
+            </div>*@
+
+        @*<div class="form-group">
+            <label class="col-md-4 control-label"> Unit </label>
+            <div class="col-md-6">
+                <input type="text"
+                       id="UnitName"
+                       class="form-control"
+                       name="UnitName" ng-model="UnitName" readonly />
+                </div>
+
+            </div>*@
+
+        @*<div class="form-group">
+            <label class="col-md-4 control-label">Destination </label>
+            <div class="col-md-6">
+                <input type="text"
+                       id="incodescription"
+                       class="form-control"
+                       name="incodescription" ng-model="IncotermDescription" readonly />
+                </div>
+
+            </div>*@
+        @*</div>*@
+
+
+        @*<div class="row">
+                <label class="col-md-2 control-label">Remarks </label>
+                <div class="col-md-9">
+                    <textarea rows="2" cols="3" readonly
+                              id="txtRemarks"
+                              class="form-control"
+                              name="txtRemarks" ng-model="Remarks"></textarea>
+                </div>
+            </div>*@
+
+        @*<div class="row" style="margin-top:3px">
+                <label class="col-md-2 control-label">Changes </label>
+                <div class="col-md-9">
+                    <textarea rows="2" cols="3" readonly style="color: red; font-size: 15px; font-weight: bold;"
+                              id="txtChanges"
+                              class="form-control"
+                              name="txtChanges" ng-model="Changes"></textarea>
+                </div>
+            </div>*@
+
+
+    </form>

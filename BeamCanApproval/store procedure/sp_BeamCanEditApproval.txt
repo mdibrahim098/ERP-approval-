@@ -1,0 +1,21 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_BeamCanEditApproval]    Script Date: 10-Jul-24 5:48:48 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[sp_BeamCanEditApproval]
+
+@ID int
+
+-- exec sp_BeamCanEditApproval 24
+as
+begin
+
+select ID , BeamCan_No, Type 
+from CmnBeam
+where ID = @ID
+
+
+end

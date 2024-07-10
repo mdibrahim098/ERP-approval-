@@ -1,0 +1,65 @@
+USE [AmberDenimNew]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_InsertBeamCanEntry]    Script Date: 10-Jul-24 5:12:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_InsertBeamCanEntry] 
+@BeamCanNo varchar(50),
+@Type varchar(50)
+
+
+
+--	-- Add the parameters for the stored procedure here
+--	<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>, 
+--	<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+--AS
+--BEGIN
+--	-- SET NOCOUNT ON added to prevent extra result sets from
+--	-- interfering with SELECT statements.
+--	SET NOCOUNT ON;
+
+--    -- Insert statements for procedure here
+--	SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
+--END
+--GO
+
+
+
+--exec [sp_InsertBeamCanEntry] 
+as 
+begin
+--Declare @Name varchar(500)
+--Declare @Msg varchar(500)
+--Set @Name = (Select Ltrim(rtrim(@BeamCan_No)))
+
+
+
+--IF EXISTS (Select * from CmnBeam where CmnBeam.BeamCan_No = @Name )
+
+--begin
+--SET @Msg = 'Duplicate Style name'
+--end
+
+--ElSE 
+--begin
+--Declare @SlubId bigint 
+--set @SlubId = (select isnull(max(SlubStyleId),0)+1 from CmnSlubStyleComposition);
+
+insert into 
+CmnBeam(BeamCan_No,Type,IsManagerApproved1,IsManagerApproved2) 
+values 
+(@BeamCanNo,@Type,0,0);
+--set @Msg='1'
+
+select '1' as result 
+
+end
+--select @Msg as Msg;
+--end
